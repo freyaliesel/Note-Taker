@@ -1,8 +1,6 @@
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
-var notes = require("./db/db.json");
-const { v4: uuidv4 } = require("uuid");
 const api = require("./routes/index.js");
 const PORT = process.env.PORT || 3001;
 const app = express();
