@@ -1,11 +1,13 @@
-const app = require('express').Router();
+const api = require('express').Router();
 const { v4: uuidv4 } = require("uuid");
 const fs = require("fs");
-var notes = require("./db/db.json");
+var notes = require("../db/db.json");
 
-app.get("/api/notes", (req, res) => res.json(notes));
+// GET route for the notes
+api.get("/", (req, res) => res.json(notes));
 
-app.post("/api/notes", (req, res) => {
+// POST route for adding to the notes db
+api.post("/", (req, res) => {
     console.info(`${req.method} request received to add a note`);
     const { title, text } = req.body;
     console.info(req.rawHeaders);
@@ -36,7 +38,8 @@ app.post("/api/notes", (req, res) => {
     }
 });
 
-app.delete("/api/notes/:id", (req, res) => {
+// DELETE route for removing notes from the db
+api.delete("/:id", (req, res) => {
     const id = req.params.id;
     console.info(`${req.method} request received to remove note ${id}`);
 
@@ -55,3 +58,5 @@ app.delete("/api/notes/:id", (req, res) => {
         res.status(400).json(`Request parameter must contain an id`);
     }
 });
+
+module.exports = api;

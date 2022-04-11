@@ -1,9 +1,8 @@
 const express = require('express');
+const apiRouter = require('./notesApi');
+const route = express();
 
-const api = require('./api');
+// all-method route for /api/notes/
+route.use('/notes', apiRouter);
 
-const app = express();
-
-app.use('/api', api);
-
-module.exports = app;
+module.exports = route;
