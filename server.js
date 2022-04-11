@@ -5,6 +5,9 @@ const notesData = require("./db/db.json");
 const app = express();
 const PORT = process.env.port || 3001;
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use(express.static("public"));
 
 app.get("/notes", (req, res) =>
@@ -20,17 +23,15 @@ app.post("/api/notes", (req, res) => {
     console.info(req.body);
     let response;
 
-    if(req.body && req.body.title && req.body.text) {
+    if (req.body && req.body.title && req.body.text) {
         response = {
-            status: 'success',
-            data: req.body
+            status: "success",
+            data: req.body,
         };
-        res.json(`${req.method} request received`);
-    }  else {
-        
-        res.json(`Request body must contain a title and text`);
+        res.status(201).json(`${req.method} request received`);
+    } else {
+        res.status(400).json(`Request body must contain a title and text`);
     }
 });
-
 
 app.listen(PORT, () => console.log(`Serving routes on port ${PORT}!`));
