@@ -1,7 +1,7 @@
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
-const notes = require("./db/db.json");
+var notes = require("./db/db.json");
 const { v4: uuidv4 } = require("uuid");
 const { fstat } = require("fs");
 
@@ -55,10 +55,10 @@ app.delete("/api/notes/:id", (req, res) => {
     console.info(`${req.method} request received to remove note ${id}`);
 
     if (id) {
-        filteredNotes = notes.filter((note) => note.id !== id);
+        notes = notes.filter((note) => note.id !== id);
         fs.writeFile(
             "./db/db.json",
-            JSON.stringify(filteredNotes, null, 4),
+            JSON.stringify(notes, null, 4),
             (err) =>
                 err
                     ? console.error(err)
