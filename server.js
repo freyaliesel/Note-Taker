@@ -50,6 +50,26 @@ app.post("/api/notes", (req, res) => {
     }
 });
 
+app.delete("/api/notes/:id", (req, res) => {
+    const id = req.params.id;
+    console.info(`${req.method} request received to remove note ${id}`);
+
+    if (id) {
+        filteredNotes = notes.filter((note) => note.id !== id);
+        fs.writeFile(
+            "./db/db.json",
+            JSON.stringify(filteredNotes, null, 4),
+            (err) =>
+                err
+                    ? console.error(err)
+                    : `Note id ${id} has been deleted from the JSON file`
+        );
+        res.status(202).json(`${req.method} request received`);
+    } else {
+        res.status(400).json(`Request parameter must contain an id`);
+    }
+});
+
 app.get("*", (req, res) =>
     res.sendFile(path.join(__dirname, "/public/index.html"))
 );
