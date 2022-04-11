@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const notesData = require("./db/db.json");
+const { v4: uuidv4 } = require("uuid");
 
 const app = express();
 const PORT = process.env.port || 3001;
@@ -18,12 +19,18 @@ app.get("/api/notes", (req, res) => res.json(notesData));
 
 app.post("/api/notes", (req, res) => {
     console.info(`${req.method} request received to add a note`);
-
+    const { title, text } = req.body;
     console.info(req.rawHeaders);
     console.info(req.body);
     let response;
 
-    if (req.body && req.body.title && req.body.text) {
+    if (title && text) {
+        const newNote = {
+            title,
+            text,
+            note_id: uuidv4(),
+        };
+        console.log(newNote);
         response = {
             status: "success",
             data: req.body,
