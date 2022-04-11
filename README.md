@@ -1,6 +1,9 @@
 # Note Taker
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
+![GitHub language count](https://img.shields.io/github/languages/count/freyaliesel/Note-Taker)
+![GitHub top language](https://img.shields.io/github/languages/top/freyaliesel/Note-Taker)
+
 
 ## Description
 
@@ -9,7 +12,6 @@ Heroku hosted app for taking and storing notes.
 ## Table of Contents
 
 - [Installation](#installation)
-
 - [Usage](#usage)
 - [Contact](#contact)
 - [License](#license)
@@ -18,21 +20,17 @@ Heroku hosted app for taking and storing notes.
 
 This app runs in the browser.
 
-   
+For a local copy, run `npm i` to install dependencies, then `node server.js` to open a port to localhost:3001 where you can then access the app in your browser of choice
 
 ## Usage
 
-Examples will be provided when completed.
-
-
-
-
+![Gif of app in use](./assets/note_taker_demo.gif)
 
 ## Contact
 
-Find more projects at [github.com/freyaliesel](https://github.com/freyaliesel)
-For questions, email [freyacodes@gmail.com](mailto:freyacodes@gmail.com)
-
+Repo for this project: [github.com/freyaliesel/Note-Taker](https://github.com/freyaliesel/Note-Taker)<br>
+Find more projects: [github.com/freyaliesel](https://github.com/freyaliesel)<br>
+Questions: email [freyacodes@gmail.com](mailto:freyacodes@gmail.com)
 
 ## License
 
