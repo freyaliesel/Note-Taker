@@ -34,8 +34,11 @@ app.post("/api/notes", (req, res) => {
         };
         notes.push(newNote);
 
-        fs.writeFile('./db/db.json', JSON.stringify(notes, null, 4),
-        err => err ? console.error(err) : `New note named ${title} has been written to JSON file` )
+        fs.writeFile("./db/db.json", JSON.stringify(notes, null, 4), (err) =>
+            err
+                ? console.error(err)
+                : `New note named ${title} has been written to JSON file`
+        );
         console.log(newNote);
         response = {
             status: "success",
@@ -46,5 +49,9 @@ app.post("/api/notes", (req, res) => {
         res.status(400).json(`Request body must contain a title and text`);
     }
 });
+
+app.get("*", (req, res) =>
+    res.sendFile(path.join(__dirname, "/public/index.html"))
+);
 
 app.listen(PORT, () => console.log(`Serving routes on port ${PORT}!`));
