@@ -1,7 +1,9 @@
 const express = require("express");
+const fs = require("fs");
 const path = require("path");
-const notesData = require("./db/db.json");
+const notes = require("./db/db.json");
 const { v4: uuidv4 } = require("uuid");
+const { fstat } = require("fs");
 
 const app = express();
 const PORT = process.env.port || 3001;
@@ -15,7 +17,7 @@ app.get("/notes", (req, res) =>
     res.sendFile(path.join(__dirname, "/public/notes.html"))
 );
 
-app.get("/api/notes", (req, res) => res.json(notesData));
+app.get("/api/notes", (req, res) => res.json(notes));
 
 app.post("/api/notes", (req, res) => {
     console.info(`${req.method} request received to add a note`);
@@ -28,8 +30,12 @@ app.post("/api/notes", (req, res) => {
         const newNote = {
             title,
             text,
-            note_id: uuidv4(),
+            id: uuidv4(),
         };
+        notes.push(newNote);
+
+        fs.writeFile('./db/db.json', JSON.stringify(notes, null, 4),
+        err => err ? console.error(err) : `New note named ${title} has been written to JSON file` )
         console.log(newNote);
         response = {
             status: "success",
